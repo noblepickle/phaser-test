@@ -23,10 +23,37 @@ export default class TestScene extends BaseScene {
             color: '#ffffff',
         }).setOrigin(0.5); // Set the origin to the center of the text for proper centering
 
-        // Make the text interactive and change its content when clicked
+        // Make the text interactive so it can respond to pointer events
         text.setInteractive();
+
+        // Add a pointerdown event listener to the text object.
         text.on('pointerdown', () => {
             text.setText('Hello, World?');
+        });
+
+        // Add pointerover and pointerout event listeners.
+        text.on('pointerover', () => {
+            // A tween is an animation that changes the properties of an object over time.
+            // In this case, we are creating a tween that scales the text up to 1.1 times its original size when the pointer is over it.
+            this.tweens.add({
+                targets: text,
+                scaleX: 1.1,
+                scaleY: 1.1,
+                duration: 200,
+                ease: 'Power2',
+            })
+        });
+
+        // Add a pointerout event listener.
+        text.on('pointerout', () => {
+            // This tween scales the text back down to its original size when the pointer is no longer hovering over it.
+            this.tweens.add({
+                targets: text,
+                scaleX: 1,
+                scaleY: 1,
+                duration: 200,
+                ease: 'Power2',
+            })
         });
     }
 
