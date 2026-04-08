@@ -28,7 +28,14 @@ export default class TestScene extends BaseScene {
 
         // Add a pointerdown event listener to the text object.
         text.on('pointerdown', () => {
-            text.setText('Hello, World?');
+            if (text.text === 'Hello, World!') {
+                text.setText('Hello, World?');
+            } else {
+                text.setText('Hello, World!');
+            }
+
+
+
         });
 
         // Add pointerover and pointerout event listeners.
