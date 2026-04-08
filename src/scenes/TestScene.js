@@ -33,9 +33,6 @@ export default class TestScene extends BaseScene {
             } else {
                 text.setText('Hello, World!');
             }
-
-
-
         });
 
         // Add pointerover and pointerout event listeners.
