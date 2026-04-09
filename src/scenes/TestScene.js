@@ -60,7 +60,7 @@ export default class TestScene extends BaseScene {
     update() {
         // The update method is called once per game frame and is used for handling real-time updates, such as player movement, animations, etc.
         // Call the base class update method to handle cursor changes
-        super.update();
+        super.updateCursor();
     }
 
 }
