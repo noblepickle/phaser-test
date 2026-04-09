@@ -18,7 +18,7 @@ export default class TestScene extends BaseScene {
 
         // Add a text object to the center of the screen
         const text = this.add.text(640, 360, 'Hello, World!', {
-            fontFamily: 'monospace',
+            fontFamily: 'sans-serif',
             fontSize: '48px',
             color: '#ffffff',
         }).setOrigin(0.5); // Set the origin to the center of the text for proper centering
@@ -28,7 +28,11 @@ export default class TestScene extends BaseScene {
 
         // Add a pointerdown event listener to the text object.
         text.on('pointerdown', () => {
-            text.setText('Hello, World?');
+            if (text.text === 'Hello, World!') {
+                text.setText('Hello, World?');
+            } else {
+                text.setText('Hello, World!');
+            }
         });
 
         // Add pointerover and pointerout event listeners.
