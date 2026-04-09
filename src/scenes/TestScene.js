@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import BaseScene from "./BaseScene";
+import Yuu from "../objects/Yuu";
 
 export default class TestScene extends BaseScene {
     constructor() {
@@ -63,36 +64,22 @@ export default class TestScene extends BaseScene {
             })
         });
 
-        // Add an image of Yuu to the scene below the text.
-        const yuu = this.add.image(640, 500, 'yuu').setScale(0.15).setInteractive();
 
-        yuu.on('pointerdown', () => {
-            console.log('clicked yuu!');
-        })
+        // Create an instance of the Yuu class and add it to the scene at position (640, 500).
+        const yuu = new Yuu(this, 640, 500);
 
         yuu.on('pointerover', () => {
-            text.setText('Yuu ❤️');
-
-            this.tweens.add({
-                targets: yuu,
-                scaleX: 0.20,
-                scaleY: 0.20,
-                duration: 200,
-                ease: 'Power2',
+            this.time.delayedCall(100, () => {
+                if (yuu.getData('hovering')) {
+                    text.setText('Yuu ❤️');
+                }
             });
         });
 
         yuu.on('pointerout', () => {
             text.setText(textStr);
-
-            this.tweens.add({
-                targets: yuu,
-                scaleX: 0.15,
-                scaleY: 0.15,
-                duration: 200,
-                ease: 'Power2',
-            });
         });
+
     }
 
     update() {
