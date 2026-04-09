@@ -8,7 +8,7 @@ export default class TestScene extends BaseScene {
 
     preload() {
         // Preload is for loading assets like images, audio, etc.
-
+        this.load.image('yuu', '/assets/sprites/yuu.png');
     }
 
     create() {
@@ -25,13 +25,16 @@ export default class TestScene extends BaseScene {
 
         // Make the text interactive so it can respond to pointer events
         text.setInteractive();
+        let textStr = 'Hello, World!';
 
         // Add a pointerdown event listener to the text object.
         text.on('pointerdown', () => {
             if (text.text === 'Hello, World!') {
                 text.setText('Hello, World?');
+                textStr = 'Hello, World?';
             } else {
                 text.setText('Hello, World!');
+                textStr = 'Hello, World!';
             }
         });
 
@@ -58,6 +61,37 @@ export default class TestScene extends BaseScene {
                 duration: 200,
                 ease: 'Power2',
             })
+        });
+
+        // Add an image of Yuu to the scene below the text.
+        const yuu = this.add.image(640, 500, 'yuu').setScale(0.15).setInteractive();
+
+        yuu.on('pointerdown', () => {
+            console.log('clicked yuu!');
+        })
+
+        yuu.on('pointerover', () => {
+            text.setText('Yuu ❤️');
+
+            this.tweens.add({
+                targets: yuu,
+                scaleX: 0.20,
+                scaleY: 0.20,
+                duration: 200,
+                ease: 'Power2',
+            });
+        });
+
+        yuu.on('pointerout', () => {
+            text.setText(textStr);
+
+            this.tweens.add({
+                targets: yuu,
+                scaleX: 0.15,
+                scaleY: 0.15,
+                duration: 200,
+                ease: 'Power2',
+            });
         });
     }
 
